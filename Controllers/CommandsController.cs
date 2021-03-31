@@ -6,6 +6,7 @@ using ApiTest.Dtos;
 using ApiTest.Profiles;
 using AutoMapper;
 using System;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ApiTest.Controllers
 {
@@ -65,12 +66,12 @@ namespace ApiTest.Controllers
             return BadRequest();
             //return Ok(command);
         }
-        // PUT api/commands/Edit
+        // PUT api/commands/{id}
         [HttpPut("{id}")]
         public ActionResult<CommandReadDto> EditCommand(int id, CommandUpdateDto commandUpdateDto)
         {   
             if(commandUpdateDto.Id != id)
-            return BadRequest();
+            return NotFound();
 
             var command = _mapper.Map<Command>(commandUpdateDto);
 
@@ -81,7 +82,29 @@ namespace ApiTest.Controllers
                 //var commandReadDto = _mapper.Map<CommandReadDto>(command);
                 return  NoContent();
             }
-            return NotFound();
+            return BadRequest();
+
+        }
+
+        //PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public ActionResult<CommandReadDto> PartialCommandUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
+        {
+            var command = _repo.GetCommandById(id);
+            if (command == null)
+            {
+                return NotFound();
+            }
+            var commandToPatch = _mapper.Map<CommandUpdateDto>(command);
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            _mapper.Map(commandToPatch, command);
+
+            if(_repo.saveChanges())  
+            {
+                return NoContent();
+            } 
+            return BadRequest();
 
         }
     }

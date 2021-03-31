@@ -15,6 +15,7 @@ using ApiTest.Data;
 using ApiTest.DaTa;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Newtonsoft.Json.Serialization;
 
 namespace ApiTest
 {
@@ -32,7 +33,9 @@ namespace ApiTest
         {
             services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();  
+            services.AddControllers().AddNewtonsoftJson(s => {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });  
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
