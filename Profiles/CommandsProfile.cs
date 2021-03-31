@@ -1,4 +1,6 @@
 using AutoMapper;
+using ApiTest.Models;
+using ApiTest.Dtos;
 
 namespace ApiTest.Profiles
 {

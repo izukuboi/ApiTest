@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiTest.Migrations
 {
     [DbContext(typeof(CommanderContext))]
-    [Migration("20210330150646_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20210331124219_InitMigrtn")]
+    partial class InitMigrtn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
