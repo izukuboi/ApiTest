@@ -65,5 +65,24 @@ namespace ApiTest.Controllers
             return BadRequest();
             //return Ok(command);
         }
+        // PUT api/commands/Edit
+        [HttpPut("{id}")]
+        public ActionResult<CommandReadDto> EditCommand(int id, CommandUpdateDto commandUpdateDto)
+        {   
+            if(commandUpdateDto.Id != id)
+            return BadRequest();
+
+            var command = _mapper.Map<Command>(commandUpdateDto);
+
+            _repo.UpdateCommand(command);
+            
+            if (_repo.saveChanges())
+            {
+                //var commandReadDto = _mapper.Map<CommandReadDto>(command);
+                return  NoContent();
+            }
+            return NotFound();
+
+        }
     }
 }

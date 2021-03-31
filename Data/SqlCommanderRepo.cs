@@ -40,5 +40,15 @@ namespace ApiTest.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void UpdateCommand(Command command)
+        {
+            if(command != null){
+                _context.Entry(command).State = EntityState.Modified;
+            }
+            else
+                throw new ArgumentNullException(nameof(command));
+            
+        }
     }
 }

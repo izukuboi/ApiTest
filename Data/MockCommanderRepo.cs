@@ -33,5 +33,15 @@ namespace ApiTest.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public Command UpdateCommand(Command command)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void ICommanderRepo.UpdateCommand(Command command)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

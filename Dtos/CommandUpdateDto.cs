@@ -2,8 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiTest.Dtos
 {
-    public class CommandCreateDto
+    public class CommandUpdateDto
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public string HowTo { get; set; }
         [Required]
