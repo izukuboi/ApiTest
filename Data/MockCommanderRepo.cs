@@ -6,6 +6,10 @@ namespace ApiTest.Data
 {
     public class MockCommanderRepo : ICommanderRepo
     {
+        public void CreateCommand(Command command)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public IEnumerable<Command> GetAllCommands()
         {
@@ -23,6 +27,11 @@ namespace ApiTest.Data
         public Command GetCommandById(int id)
         {
             return new Command{Id = 0, HowTo = "boil a", Line = "Boil water", Platform = "Kettle & Pan"};
+        }
+
+        public bool saveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
